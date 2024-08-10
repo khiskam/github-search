@@ -1,0 +1,14 @@
+.loader {
+  animation: rotation 1200ms ease-in-out infinite;
+  stroke: #42567a;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

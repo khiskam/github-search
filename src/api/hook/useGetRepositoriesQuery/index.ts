@@ -1,0 +1,1 @@
+export { useGetRepositoriesQuery } from "./useGetRepositoriesQuery";
