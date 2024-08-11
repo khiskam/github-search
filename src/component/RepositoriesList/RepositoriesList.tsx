@@ -1,34 +1,38 @@
+import { FC } from "react";
 import List from "react-infinite-scroll-component";
 
 import { useGetRepositoriesQuery } from "@/api/hook/useGetRepositoriesQuery";
-import { RepositoryResponse } from "@/api/lib/getRepositories";
-import { Repository } from "@/model/Repository";
-import Loader from "@/ui/Loader";
 
-const RepositoriesList = () => {
-  const { data, fetchNextPage, hasNextPage, isError } =
-    useGetRepositoriesQuery("123");
+import Alert from "../Alert";
+import Loader from "../Loader";
+import RepositoryCard from "../RepositoryCard";
+import { getList } from "./helper";
+import { RepositoriesListProps } from "./type";
 
-  console.log(hasNextPage);
+const RepositoriesList: FC<RepositoriesListProps> = ({ q }) => {
+  const { data, fetchNextPage, hasNextPage, isLoading, isError } =
+    useGetRepositoriesQuery(q);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   if (isError) {
-    return <p>Сервис пока не доступен</p>;
+    return <Alert message="Произошла ошибка. Попробуйте позже..." />;
+  }
+
+  if (q === "") {
+    return <Alert message="Введите поисковый запрос" />;
   }
 
   if (!data) {
-    return <p>пока нет данных</p>;
+    return <Alert message={`По запросу "${q}" ничего не найдено`} />;
   }
 
-  const listData = data.pages.reduce(
-    (acc: Repository[], prev: RepositoryResponse): Repository[] => [
-      ...acc,
-      ...prev.items,
-    ],
-    []
-  );
+  const listData = getList(data);
 
   if (listData.length === 0) {
-    return <p></p>;
+    return <Alert message={`По запросу "${q}" ничего не найдено`} />;
   }
 
   return (
@@ -36,14 +40,26 @@ const RepositoriesList = () => {
       dataLength={listData.length}
       next={fetchNextPage}
       hasMore={hasNextPage}
-      loader={<Loader />}
-      endMessage={<p>вы дошли до конца списка</p>}
+      loader={<Alert icon={<Loader />} />}
+      endMessage={<Alert message="Вы дошли до конца списка" />}
+      className="p-2"
     >
-      {listData.map((item) => (
-        <p key={item.id}>{item.full_name}</p>
-      ))}
+      <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2">
+        {listData.map((repo) => (
+          <RepositoryCard key={repo.id} repo={repo} />
+        ))}
+      </div>
     </List>
   );
 };
 
-export default RepositoriesList;
+export const RepositoriesListWithTitle: FC<RepositoriesListProps> = (props) => {
+  return (
+    <div className="grid gap-4">
+      <h2 className="text-slate-700 font-bold text-2xl">Список репозиториев</h2>
+      <RepositoriesList {...props} />
+    </div>
+  );
+};
+
+export default RepositoriesListWithTitle;
