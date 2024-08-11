@@ -1,33 +1,25 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Repositories from "../component/Repositories";
-import Repository from "../component/Repository";
-
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Repositories />,
-  },
-  {
-    path: "repos",
+    lazy: async () => {
+      const Layout = await import("@/component/Layout");
+      return { Component: Layout.default };
+    },
     children: [
       {
-        index: true,
-        element: <Repositories />,
+        path: "/",
+        lazy: async () => {
+          const Repositories = await import("@/component/Repositories");
+          return { Component: Repositories.default };
+        },
       },
       {
-        path: ":userName",
-
-        children: [
-          {
-            index: true,
-            element: <></>,
-          },
-          {
-            path: ":repoName",
-            element: <Repository />,
-          },
-        ],
+        path: "repos/:userName/:repoName",
+        lazy: async () => {
+          const Repository = await import("@/component/Repository");
+          return { Component: Repository.default };
+        },
       },
     ],
   },

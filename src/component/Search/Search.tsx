@@ -5,7 +5,7 @@ import { SearchProps } from "./type";
 
 const Search: FC<SearchProps> = ({ q, onChange }) => {
   return (
-    <div className="flex gap-2 mb-4">
+    <form className="flex gap-2 mb-4">
       <input
         className="shadow appearance-none border rounded w-full py-2 px-3 text-slate-600 leading-tight focus:outline-none focus:shadow-outline"
         id="search"
@@ -15,7 +15,7 @@ const Search: FC<SearchProps> = ({ q, onChange }) => {
         value={q}
       />
       <CopyButton text={q} />
-    </div>
+    </form>
   );
 };
 

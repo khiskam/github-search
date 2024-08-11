@@ -5,7 +5,11 @@ import { NavLink } from "react-router-dom";
 
 import FavoritesStore from "@/store/FavoritesStore";
 
+import Tag from "../Tag";
 import { RepositoryCardProps } from "./type";
+
+const buttonStyles =
+  "flex items-center gap-x-2 bg-slate-200 rounded-full px-1.5 py-1.5 text-sm font-bold text-slate-600 transition-all duration-500 hover:bg-slate-300";
 
 const RepositoryCard: FC<RepositoryCardProps> = observer(({ repo }) => {
   return (
@@ -18,7 +22,7 @@ const RepositoryCard: FC<RepositoryCardProps> = observer(({ repo }) => {
 
       <a
         href={repo.html_url}
-        className="font-bold text-xl text-slate-600 truncate object-contain"
+        className="font-bold text-xl text-slate-600 truncate hover:underline"
         target="_blank"
       >
         {repo.full_name}
@@ -26,19 +30,13 @@ const RepositoryCard: FC<RepositoryCardProps> = observer(({ repo }) => {
 
       <div className="flex justify-between flex-wrap mt-2 gap-2">
         <div className="flex gap-1">
-          <span className="flex items-center gap-x-2 bg-slate-200 rounded-full px-3 py-1.5 text-sm font-semibold text-slate-600">
-            <Star />
-            {repo.stargazers_count}
-          </span>
-          <span className="flex items-center gap-x-2 bg-slate-200 rounded-full px-3 py-1.5 text-sm font-semibold text-slate-600">
-            <GitFork />
-            {repo.forks_count}
-          </span>
+          <Tag icon={<Star />} value={repo.stargazers_count} />
+          <Tag icon={<GitFork />} value={repo.forks_count} />
         </div>
 
-        <div className="flex  gap-1">
+        <div className="flex gap-1">
           <button
-            className="flex items-center gap-x-2 bg-slate-200 rounded-full px-1.5 py-1.5 text-sm font-semibold"
+            className={buttonStyles}
             onClick={() => FavoritesStore.toggle(repo)}
           >
             <FolderHeart
@@ -49,10 +47,7 @@ const RepositoryCard: FC<RepositoryCardProps> = observer(({ repo }) => {
               }
             />
           </button>
-          <NavLink
-            to={`/repos/${repo.full_name}`}
-            className="flex items-center gap-x-2 bg-slate-200 rounded-full px-1.5 py-1.5 text-sm font-semibold text-slate-600"
-          >
+          <NavLink to={`/repos/${repo.full_name}`} className={buttonStyles}>
             <ChevronRight />
           </NavLink>
         </div>

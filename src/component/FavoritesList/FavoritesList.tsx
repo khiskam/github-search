@@ -9,8 +9,8 @@ const FavoritesList = observer(() => {
   const favorites = Array.from(FavoritesStore.data);
 
   return (
-    <div className="grid gap-4">
-      <h2 className="text-slate-700 font-bold text-2xl">Избранное</h2>
+    <section className="grid gap-4">
+      <h2 className="text-slate-600 font-bold text-2xl">Избранное</h2>
 
       {FavoritesStore.data.size === 0 ? (
         <Alert message="В избранных пока ничего нет..." />
@@ -21,7 +21,7 @@ const FavoritesList = observer(() => {
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 });
 export default FavoritesList;

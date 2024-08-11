@@ -5,7 +5,7 @@ import { AlertProps } from "./type";
 const Alert: FC<AlertProps> = ({ message, icon }) => {
   return (
     <div
-      className="bg-slate-100 rounded text-slate-700 mt-4 px-4 py-3"
+      className="bg-slate-100 rounded text-slate-600 mt-4 px-4 py-3"
       role="alert"
     >
       {icon}

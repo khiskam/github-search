@@ -19,13 +19,11 @@ const Repositories = () => {
   };
 
   return (
-    <div className="container">
-      <div className="grid gap-12 mt-8">
-        <Search q={q} onChange={onChange} />
-        <FavoritesList />
-        <RepositoriesList q={throttledValue} />
-      </div>
-    </div>
+    <>
+      <Search q={q} onChange={onChange} />
+      <FavoritesList />
+      <RepositoriesList q={throttledValue} />
+    </>
   );
 };
 

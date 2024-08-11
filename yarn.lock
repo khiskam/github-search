@@ -354,11 +354,6 @@
   resolved "https://registry.yarnpkg.com/@eslint/object-schema/-/object-schema-2.1.4.tgz#9e69f8bb4031e11df79e03db09f9dbbae1740843"
   integrity sha512-BsWiH1yFGjXXS2yvrf5LyuoSIIbPrGUWob917o+BTKuZ7qJdxX8aJLRxs1fS9n6r7vESrq1OUqb68dANcFXuQQ==
 
-"@fontsource/pt-sans@^5.0.13":
-  version "5.0.13"
-  resolved "https://registry.yarnpkg.com/@fontsource/pt-sans/-/pt-sans-5.0.13.tgz#b6c34cdafc171f3310bcb6001406cc0d5c28b3b0"
-  integrity sha512-wINZg2k2SFdBEYFt3N1LQJBQtlzqhq9t1TrZPB+ChWIkoA3UQCrpc1Go9I8xeL85vk/mqwaw6EJX5ce9rNF2sw==
-
 "@humanwhocodes/module-importer@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/module-importer/-/module-importer-1.0.1.tgz#af5b2691a22b44be847b0ca81641c5fb6ad0172c"

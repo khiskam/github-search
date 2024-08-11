@@ -22,17 +22,17 @@ const RepositoriesList: FC<RepositoriesListProps> = ({ q }) => {
   }
 
   if (q === "") {
-    return <Alert message="Введите поисковый запрос" />;
+    return <Alert message="Введите поисковый запрос..." />;
   }
 
   if (!data) {
-    return <Alert message={`По запросу "${q}" ничего не найдено`} />;
+    return <Alert message={`По запросу "${q}" ничего не найдено...`} />;
   }
 
   const listData = getList(data);
 
   if (listData.length === 0) {
-    return <Alert message={`По запросу "${q}" ничего не найдено`} />;
+    return <Alert message={`По запросу "${q}" ничего не найдено...`} />;
   }
 
   return (
@@ -41,7 +41,7 @@ const RepositoriesList: FC<RepositoriesListProps> = ({ q }) => {
       next={fetchNextPage}
       hasMore={hasNextPage}
       loader={<Alert icon={<Loader />} />}
-      endMessage={<Alert message="Вы дошли до конца списка" />}
+      endMessage={<Alert message="Вы дошли до конца списка..." />}
       className="p-2"
     >
       <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2">
@@ -55,10 +55,10 @@ const RepositoriesList: FC<RepositoriesListProps> = ({ q }) => {
 
 export const RepositoriesListWithTitle: FC<RepositoriesListProps> = (props) => {
   return (
-    <div className="grid gap-4">
-      <h2 className="text-slate-700 font-bold text-2xl">Список репозиториев</h2>
+    <section className="grid gap-4">
+      <h2 className="text-slate-600 font-bold text-2xl">Список репозиториев</h2>
       <RepositoriesList {...props} />
-    </div>
+    </section>
   );
 };
 

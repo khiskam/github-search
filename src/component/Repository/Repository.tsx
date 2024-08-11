@@ -1,75 +1,45 @@
-import { GitFork, Star } from "lucide-react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 import { useGetRepositoryQuery } from "@/api/hook/useGetRepositoryQuery";
 
+import Alert from "../Alert";
 import Loader from "../Loader";
+import { RepositoryData } from "./RepositoryData";
+import { RepositoryProfile } from "./RepositoryProfile";
 
 const Repository = () => {
   const { userName, repoName } = useParams();
+  const fullName = `${userName}/${repoName}`;
 
-  const { data, isLoading, isError } = useGetRepositoryQuery(
-    `${userName}/${repoName}`
-  );
+  const { data, isLoading, isError } = useGetRepositoryQuery(fullName);
 
   if (isLoading) {
     return <Loader />;
   }
 
   if (isError) {
-    return <>error</>;
+    return <Alert message="Произошла ошибка. Попробуйте позже..." />;
   }
 
   if (!data) {
-    return <>not found</>;
+    return (
+      <Alert message={`Информации о репозитории ${fullName} не найдено...`} />
+    );
   }
 
   return (
-    <section className="container">
-      <div className="grid grid-cols-[1fr_2fr] gap-4">
-        <div className="shadow p-8 rounded grid gap-4">
-          <img
-            src={data.owner.avatar_url}
-            alt=""
-            className="w-full object-contain rounded-full"
-          />
-          <a href={data.owner.html_url} className="hover:underline">
-            {data.owner.login}
-          </a>
-        </div>
+    <>
+      <h2 className="text-slate-600 font-bold text-2xl">{data.full_name}</h2>
 
-        <div className="shadow p-8 rounded grid align-top">
-          <div className="flex gap-1 align-top">
-            <span className="flex  gap-x-2 bg-slate-200 rounded-full px-3 py-1.5 text-sm font-semibold text-slate-600">
-              <Star />
-              {data.stargazers_count}
-            </span>
-            <span className="flex  gap-x-2 bg-slate-200 rounded-full px-3 py-1.5 text-sm font-semibold text-slate-600">
-              <GitFork />
-              {data.forks_count}
-            </span>
-            <span className="flex  gap-x-2 bg-slate-200 rounded-full px-3 py-1.5 text-sm font-semibold text-slate-600">
-              {data.language}
-            </span>
-            <span className="flex  gap-x-2 bg-slate-200 rounded-full px-3 py-1.5 text-sm font-semibold text-slate-600">
-              {data.private ? "Приватный" : "Публичный"}
-            </span>
-            <span className="flex  gap-x-2 bg-slate-200 rounded-full px-3 py-1.5 text-sm font-semibold text-slate-600">
-              Создано {new Date(data.created_at).toLocaleDateString("ru")}
-            </span>
-            <span className="flex  gap-x-2 bg-slate-200 rounded-full px-3 py-1.5 text-sm font-semibold text-slate-600">
-              {new Date(data.created_at).toLocaleDateString("ru")}
-            </span>
-
-            {data.archived && (
-              <span className="flex  gap-x-2 bg-slate-200 rounded-full px-3 py-1.5 text-sm font-semibold text-slate-600">
-                В архиве
-              </span>
-            )}
-          </div>
-        </div>
+      <div className="grid lg:grid-cols-[1fr_2fr] md:grid-cols-1 gap-4">
+        <RepositoryProfile owner={data.owner} />
+        <RepositoryData repo={data} />
       </div>
-    </section>
+
+      <NavLink to="/" className="text-slate-600 font-bold hover:underline">
+        На главную
+      </NavLink>
+    </>
   );
 };
 
