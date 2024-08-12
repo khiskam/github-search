@@ -17,6 +17,7 @@ export const RepositoryProfile: FC<RepositoryProfileProps> = ({ owner }) => {
           href={owner.html_url}
           target="_blank"
           className="text-slate-600 font-bold hover:underline"
+          aria-label={owner.login}
         >
           Открыть профиль
         </a>

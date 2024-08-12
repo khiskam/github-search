@@ -31,6 +31,7 @@ export const RepositoryData: FC<RepositoryDataProps> = ({ repo }) => {
           href={repo.html_url}
           target="_blank"
           className="text-slate-600 font-bold hover:underline"
+          aria-label={repo.full_name}
         >
           Открыть репозиторий
         </a>

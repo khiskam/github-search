@@ -40,7 +40,11 @@ const Repository = () => {
         <RepositoryData repo={data} />
       </div>
 
-      <NavLink to="/" className="text-slate-600 font-bold hover:underline">
+      <NavLink
+        to="/"
+        className="text-slate-600 font-bold hover:underline"
+        aria-label={"На главную"}
+      >
         На главную
       </NavLink>
     </section>

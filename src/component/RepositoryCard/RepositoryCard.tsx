@@ -24,6 +24,7 @@ const RepositoryCard: FC<RepositoryCardProps> = observer(({ repo }) => {
         href={repo.html_url}
         className="font-bold text-xl text-slate-600 truncate hover:underline"
         target="_blank"
+        aria-label={repo.full_name}
       >
         {repo.full_name}
       </a>
@@ -38,6 +39,7 @@ const RepositoryCard: FC<RepositoryCardProps> = observer(({ repo }) => {
           <button
             className={buttonStyles}
             onClick={() => FavoritesStore.toggle(repo)}
+            aria-label="Добавить в избранное"
           >
             <FolderHeart
               className={
@@ -47,7 +49,11 @@ const RepositoryCard: FC<RepositoryCardProps> = observer(({ repo }) => {
               }
             />
           </button>
-          <NavLink to={`/repos/${repo.full_name}`} className={buttonStyles}>
+          <NavLink
+            to={`/repos/${repo.full_name}`}
+            className={buttonStyles}
+            aria-label={repo.full_name}
+          >
             <ChevronRight />
           </NavLink>
         </div>

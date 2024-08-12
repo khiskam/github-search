@@ -28,6 +28,7 @@ const CopyButton: FC<CopyButtonProps> = ({ text }) => {
       className="shadow border rounded px-1.5 text-slate-600 transition-all duration-500 hover:bg-slate-100"
       onClick={isWritten ? undefined : copy}
       type="button"
+      aria-label={isWritten ? "Copied" : "Copy"}
     >
       {isWritten ? "Copied" : "Copy"}
     </button>
