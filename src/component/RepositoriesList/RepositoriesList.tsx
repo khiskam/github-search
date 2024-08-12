@@ -9,7 +9,7 @@ import RepositoryCard from "../RepositoryCard";
 import { getList } from "./helper";
 import { RepositoriesListProps } from "./type";
 
-const RepositoriesList: FC<RepositoriesListProps> = ({ q }) => {
+export const RepositoriesList: FC<RepositoriesListProps> = ({ q }) => {
   const { data, fetchNextPage, hasNextPage, isLoading, isError } =
     useGetRepositoriesQuery(q);
 
@@ -52,14 +52,3 @@ const RepositoriesList: FC<RepositoriesListProps> = ({ q }) => {
     </List>
   );
 };
-
-export const RepositoriesListWithTitle: FC<RepositoriesListProps> = (props) => {
-  return (
-    <section className="grid gap-4">
-      <h2 className="text-slate-600 font-bold text-2xl">Список репозиториев</h2>
-      <RepositoriesList {...props} />
-    </section>
-  );
-};
-
-export default RepositoriesListWithTitle;

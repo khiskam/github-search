@@ -32,7 +32,7 @@ const Repository = () => {
   }
 
   return (
-    <>
+    <section className="grid gap-8">
       <h2 className="text-slate-600 font-bold text-2xl">{data.full_name}</h2>
 
       <div className="grid lg:grid-cols-[1fr_2fr] md:grid-cols-1 gap-4">
@@ -43,7 +43,7 @@ const Repository = () => {
       <NavLink to="/" className="text-slate-600 font-bold hover:underline">
         На главную
       </NavLink>
-    </>
+    </section>
   );
 };
 
