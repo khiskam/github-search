@@ -13,8 +13,9 @@ export const RepositoryData: FC<RepositoryDataProps> = ({ repo }) => {
 
       <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
         <Description label="Количество звезд" value={repo.stargazers_count} />
-        <Description label="Количество форков" value={repo.forks_count} />
         <Description label="В архиве" value={repo.archived ? "да" : "нет"} />
+        <Description label="Количество форков" value={repo.forks_count} />
+        <Description label="Язык" value={repo.language ?? "-"} />
         <Description
           label="Создано"
           value={new Date(repo.created_at).toLocaleDateString("ru")}
@@ -23,19 +24,17 @@ export const RepositoryData: FC<RepositoryDataProps> = ({ repo }) => {
           label="Изменено"
           value={new Date(repo.updated_at).toLocaleDateString("ru")}
         />
-        <Description
-          label="Язык"
-          value={repo.private ? "Приватный" : "Публичный"}
-        />
-        <Description label="Язык" value="да" />
+        {repo.private && <Description label="Приватный" value="да" />}
       </div>
-      <a
-        href={repo.html_url}
-        target="_blank"
-        className="text-slate-600 font-bold hover:underline"
-      >
-        Открыть репозиторий
-      </a>
+      {!repo.private && (
+        <a
+          href={repo.html_url}
+          target="_blank"
+          className="text-slate-600 font-bold hover:underline"
+        >
+          Открыть репозиторий
+        </a>
+      )}
     </div>
   );
 };
