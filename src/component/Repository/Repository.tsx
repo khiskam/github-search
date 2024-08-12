@@ -14,7 +14,11 @@ const Repository = () => {
   const { data, isLoading, isError } = useGetRepositoryQuery(fullName);
 
   if (isLoading) {
-    return <Loader />;
+    return (
+      <div className="flex justify-center items-center">
+        <Loader />
+      </div>
+    );
   }
 
   if (isError) {

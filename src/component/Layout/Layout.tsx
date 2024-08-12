@@ -2,10 +2,10 @@ import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <div className="container">
-      <div className="grid gap-12 my-8">
+    <div className="container min-h-screen py-8 grid">
+      <main className="grid gap-12 min-h-full items-start content-start">
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 };
